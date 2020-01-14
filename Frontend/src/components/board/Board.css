@@ -1,0 +1,18 @@
+.list-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    white-space: nowrap;
+    right: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 15px;
+}
+
+.list {
+    width: 300px;
+    margin: 7px;
+    display: inline-block;
+    height: 100%;
+}
