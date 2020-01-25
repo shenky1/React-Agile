@@ -20,15 +20,6 @@ const Sidebar = () => {
                         activeClassName="selected" 
                         to="/" 
                         className="list-group-item list-group-item-action bg-light">
-                        Home
-                    </NavLink>
-                </div>
-
-                <div>
-                    <NavLink 
-                        activeClassName="selected" 
-                        to="/boards" 
-                        className="list-group-item list-group-item-action bg-light">
                         Boards
                     </NavLink>
                     

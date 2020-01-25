@@ -10673,11 +10673,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Matija\\Source\\Repos\\TrelloAPI\\TrelloAPI\\TrelloAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Matija\\react\\trello\\TrelloAPI\\TrelloAPI\\TrelloAPI.csproj",
       "projectName": "TrelloAPI",
-      "projectPath": "C:\\Users\\Matija\\Source\\Repos\\TrelloAPI\\TrelloAPI\\TrelloAPI.csproj",
+      "projectPath": "C:\\Users\\Matija\\react\\trello\\TrelloAPI\\TrelloAPI\\TrelloAPI.csproj",
       "packagesPath": "C:\\Users\\Matija\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Matija\\Source\\Repos\\TrelloAPI\\TrelloAPI\\obj\\",
+      "outputPath": "C:\\Users\\Matija\\react\\trello\\TrelloAPI\\TrelloAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

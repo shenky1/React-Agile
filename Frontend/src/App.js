@@ -89,8 +89,7 @@ const HomeApp = (props) => {
             
             <div className="route-container flex-grow-1 d-flex">
                 <Switch>
-                    <Route path="/" component={Home} exact/>
-                    <Route path="/boards" component={Boards}/>
+                    <Route path="/" component={Boards} exact/>
                     <Route path="/board" component={Board}/>
                     <Route path="/teams" component={Teams}/>
                     <Route path="/profile" component={Profile} />
