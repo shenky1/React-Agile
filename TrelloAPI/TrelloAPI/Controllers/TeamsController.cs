@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrelloAPI.Controllers.Request;
-using TrelloAPI.Controllers.Response;
+using TrelloAPI.Controllers.Users;
 using Microsoft.EntityFrameworkCore;
 using TrelloAPI.Models;
 using TrelloAPI.Services;
@@ -85,5 +85,22 @@ namespace TrelloAPI.Controllers
 
             return Ok(team);
         }
+
+        [HttpPost("updateTeamUsers/{id}")]
+        public async Task<ActionResult<Team>> UpdateTeamUsers(long id, List<UserModel> users)
+        {
+            var team = await _teamService.UpdateTeamUsers(id, users);
+
+            return Ok(team);
+        }
+
+        [HttpPost("deleteEntireTeam/{id}")]
+        public async Task<ActionResult<Team>> DeleteEntireTeam(long id)
+        {
+            var team = await _teamService.DeleteEntireTeam(id);
+
+            return CreatedAtAction(nameof(GetTeam), team);
+        }
+
     }
 }

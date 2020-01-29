@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Form, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import { withRouter } from 'react-router-dom';
 import "./Register.css";
 import axios from 'axios';
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 class Register extends React.Component {
     constructor(props) {
@@ -44,8 +44,8 @@ class Register extends React.Component {
             <div className="Register">
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup controlId="username" bsSize="large">
-                        <FormLabel>Username</FormLabel>
-                        <FormControl
+                        <Label>Username</Label>
+                        <Input
                             autoFocus
                             type="text"
                             value={this.state.username}
@@ -54,8 +54,8 @@ class Register extends React.Component {
                     </FormGroup>
 
                     <FormGroup controlId="password" bsSize="large">
-                        <FormLabel>Password</FormLabel>
-                        <FormControl
+                        <Label>Password</Label>
+                        <Input
                             value={this.state.password}
                             onChange={e => this.setState({ 'password': e.target.value})}
                             type="password"
@@ -63,8 +63,8 @@ class Register extends React.Component {
                     </FormGroup>
 
                     <FormGroup controlId="eMail" bsSize="large">
-                        <FormLabel>Email</FormLabel>
-                        <FormControl
+                        <Label>Email</Label>
+                        <Input
                         autoFocus
                         type="email"
                         value={this.state.eMail}
@@ -73,8 +73,8 @@ class Register extends React.Component {
                     </FormGroup>
 
                     <FormGroup controlId="firstName" bsSize="large">
-                        <FormLabel>First Name</FormLabel>
-                        <FormControl
+                        <Label>First Name</Label>
+                        <Input
                             autoFocus
                             type="text"
                             value={this.state.firstName}
@@ -83,8 +83,8 @@ class Register extends React.Component {
                     </FormGroup>
 
                     <FormGroup controlId="lastName" bsSize="large">
-                        <FormLabel>Last Name</FormLabel>
-                        <FormControl
+                        <Label>Last Name</Label>
+                        <Input
                             autoFocus
                             type="text"
                             value={this.state.lastName}

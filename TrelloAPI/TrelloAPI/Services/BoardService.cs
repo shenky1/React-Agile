@@ -69,6 +69,22 @@ namespace TrelloAPI.Services
             return boardResponses;
         }
 
+        public async Task<IEnumerable<BoardResponse>> GetBoardsForTeam(long id)
+        {
+            var boards = await _boardRepository.GetBoardsForTeam(id);
+
+            var boardResponses = MapModelToResponse(boards);
+            return boardResponses;
+        }
+
+        public async Task<ActionResult<Board>> DeleteEntireBoard(long id)
+        {
+            var board = await _boardRepository.DeleteEntireBoard(id);
+
+            return board;
+        }
+
+
 
         public Board MapRequestToModel(BoardRequest boardRequest)
         {
@@ -82,7 +98,8 @@ namespace TrelloAPI.Services
                 Id = boardRequest.Id,
                 Name = boardRequest.Name,
                 ImageUrl = boardRequest.ImageUrl,
-                Description = boardRequest.Description
+                Description = boardRequest.Description,
+                TeamId = boardRequest.TeamId
             };
 
             return board;
@@ -117,7 +134,8 @@ namespace TrelloAPI.Services
                 Id = board.Id,
                 Name = board.Name,
                 ImageUrl = board.ImageUrl,
-                Description = board.Description
+                Description = board.Description,
+                TeamId = board.TeamId
             };
 
             return boardResponse;

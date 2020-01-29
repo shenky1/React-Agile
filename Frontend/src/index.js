@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './assets/css/simple-sidebar.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/react-widgets/dist/css/react-widgets.css';
+import '../node_modules/react-tabs/style/react-tabs.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

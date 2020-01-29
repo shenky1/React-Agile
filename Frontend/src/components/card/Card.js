@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Card as ReactCard, CardBody, Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { FaTimes, FaCheck } from 'react-icons/fa';
-import '../../App.css';
+import '../../App.scss';
 
 
 class Card extends React.Component {

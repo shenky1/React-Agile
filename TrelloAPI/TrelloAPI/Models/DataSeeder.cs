@@ -17,8 +17,125 @@ namespace TrelloAPI.Models
                     FirstName = "Matija",
                     LastName = "Selendic",
                     EMail = "matijaselendic@gmail.com",
-                    Username = "user"
-                }, "pass");
+                    Username = "matija"
+                }, "matijinasifra");
+
+                userService.Create(new User
+                {
+                    Id = 2,
+                    FirstName = "Stjepan",
+                    LastName = "Selendic",
+                    EMail = "stjepanselendic@gmail.com",
+                    Username = "stjepan"
+                }, "stjepanovasifra");
+
+                userService.Create(new User
+                {
+                    Id = 3,
+                    FirstName = "Josip",
+                    LastName = "Josipovic",
+                    EMail = "josipjosipovic@gmail.com",
+                    Username = "josip"
+                }, "josipovasifra");
+
+                userService.Create(new User
+                {
+                    Id = 4,
+                    FirstName = "Ivan",
+                    LastName = "Ivic",
+                    EMail = "ivanivic@gmail.com",
+                    Username = "ivan"
+                }, "ivanovasifra");
+
+                userService.Create(new User
+                {
+                    Id = 5,
+                    FirstName = "Karlo",
+                    LastName = "Karlic",
+                    EMail = "karlokarlic@gmail.com",
+                    Username = "karlo"
+                }, "karlovasifra");
+
+                userService.Create(new User
+                {
+                    Id = 6,
+                    FirstName = "Ana",
+                    LastName = "Anic",
+                    EMail = "anaanic@gmail.com",
+                    Username = "ana"
+                }, "aninasifra");
+
+                userService.Create(new User
+                {
+                    Id = 7,
+                    FirstName = "Martina",
+                    LastName = "Selendic",
+                    EMail = "martinaselendic@gmail.com",
+                    Username = "martina"
+                }, "martininasifra");
+
+                userService.Create(new User
+                {
+                    Id = 8,
+                    FirstName = "Kristina",
+                    LastName = "Krstanovic",
+                    EMail = "kristinakrstanovic@gmail.com",
+                    Username = "kristina"
+                }, "krstanovic");
+
+                userService.Create(new User
+                {
+                    Id = 9,
+                    FirstName = "Zvonimir",
+                    LastName = "Zvonko",
+                    EMail = "zvonimirzvonko@gmail.com",
+                    Username = "zvonimir"
+                }, "zvonimirovasifra");
+
+                userService.Create(new User
+                {
+                    Id = 10,
+                    FirstName = "Martin",
+                    LastName = "Martincic",
+                    EMail = "martinmartincic@gmail.com",
+                    Username = "martin"
+                }, "martinovasifra");
+
+                userService.Create(new User
+                {
+                    Id = 11,
+                    FirstName = "Fran",
+                    LastName = "Franic",
+                    EMail = "franfranic@gmail.com",
+                    Username = "fran"
+                }, "franovasifra");
+
+                userService.Create(new User
+                {
+                    Id = 12,
+                    FirstName = "Iva",
+                    LastName = "Ivic",
+                    EMail = "ivaivic@gmail.com",
+                    Username = "iva"
+                }, "ivinasifra");
+
+                userService.Create(new User
+                {
+                    Id = 13,
+                    FirstName = "Josipa",
+                    LastName = "Jopic",
+                    EMail = "josipajopic@gmail.com",
+                    Username = "josipa"
+                }, "josipinasifra");
+
+                userService.Create(new User
+                {
+                    Id = 14,
+                    FirstName = "Ante",
+                    LastName = "Antic",
+                    EMail = "anteantic@gmail.com",
+                    Username = "ante"
+                }, "antinasifra");
             }
 
             if (!context.Boards.Any())
@@ -29,34 +146,43 @@ namespace TrelloAPI.Models
                     {
                         Id = 1,
                         TeamId = 1,
-                        Name = "Trello Board",
+                        Name = "Trello App",
                         ImageUrl = "https://wallpaperplay.com/walls/full/0/2/2/82794.jpg",
                         Description ="Developing Trello application. Used by business analysts for taking care of project management."
                     },
                     new Board
                     {
                         Id = 2,
-                        TeamId = 1,
-                        Name = "Trello Board 2",
+                        TeamId = 2,
+                        Name = "RP2 Project",
                         ImageUrl = "https://www.elsetge.cat/myimg/f/147-1475661_download-parchment-paper-texture-picture-free-graph.jpg",
-                        Description ="Developing Trello 2 application. Clone of trello. Created by students."
-                  },
+                        Description ="Developing project application for RP2 collegium on PMF."
+                    },
                     new Board
                     {
                         Id = 3,
                         TeamId = 2,
-                        Name = "PMF Board",
+                        Name = "RP3 Project",
                         ImageUrl = "https://i.pinimg.com/originals/e1/09/2d/e1092db6cd8fe8650e9dfe93719736a6.jpg",
                         Description ="Used by PMF students and professors."
                     },
                     new Board
                     {
                         Id = 4,
-                        TeamId = 2,
-                        Name = "PMF Board 2",
+                        TeamId = 3,
+                        Name = "Java App",
                         ImageUrl = "https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&w=1000&q=80",
-                        Description ="Description default"
-               },
+                        Description ="FER application developed in Java"
+                    },
+                    new Board
+                    {
+                        Id = 5,
+                        TeamId = 4,
+                        Name = "AVL App",
+                        ImageUrl = "https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&w=1000&q=80",
+                        Description ="Application developed in AVL team"
+                    },
+
 
                 };
                 context.AddRange(boards);
@@ -151,13 +277,25 @@ namespace TrelloAPI.Models
                         {
                             Id = 1,
                             AuthorId = 1,
-                            Name = "Trello guys"
+                            Name = "Trello team"
                         },
                         new Team
                         {
                             Id = 2,
-                            AuthorId = 4,
-                            Name = "PMF - best of the best"
+                            AuthorId = 9,
+                            Name = "PMF guys"
+                        },
+                        new Team
+                        {
+                            Id = 3,
+                            AuthorId = 10,
+                            Name = "FER devs"
+                        },
+                        new Team
+                        {
+                            Id = 4,
+                            AuthorId = 14,
+                            Name = "AVL team"
                         }
                     };
                     context.AddRange(teams);
@@ -188,26 +326,110 @@ namespace TrelloAPI.Models
                         {
                             Id = 4,
                             UserId = 4,
-                            TeamId = 2
+                            TeamId = 1
                         },
                         new TeamUserMapping
                         {
                             Id = 5,
                             UserId = 5,
-                            TeamId = 2
+                            TeamId = 1
                         },
                         new TeamUserMapping
                         {
                             Id = 6,
                             UserId = 6,
-                            TeamId = 2
+                            TeamId = 1
                         },
                         new TeamUserMapping
                         {
                             Id = 7,
+                            UserId = 7,
+                            TeamId = 1
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 8,
+                            UserId = 8,
+                            TeamId = 1
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 9,
                             UserId = 1,
                             TeamId = 2
                         },
+                        new TeamUserMapping
+                        {
+                            Id = 10,
+                            UserId = 5,
+                            TeamId = 2
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 11,
+                            UserId = 6,
+                            TeamId = 2
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 12,
+                            UserId = 7,
+                            TeamId = 2
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 13,
+                            UserId = 9,
+                            TeamId = 2
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 14,
+                            UserId = 10,
+                            TeamId = 3
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 15,
+                            UserId = 11,
+                            TeamId = 3
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 16,
+                            UserId = 12,
+                            TeamId = 3
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 17,
+                            UserId = 13,
+                            TeamId = 3
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 18,
+                            UserId = 1,
+                            TeamId = 4
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 19,
+                            UserId = 2,
+                            TeamId = 4
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 20,
+                            UserId = 14,
+                            TeamId = 4
+                        },
+                        new TeamUserMapping
+                        {
+                            Id = 21,
+                            UserId = 12,
+                            TeamId = 4
+                        }
 
                     };
                     context.AddRange(userTeamMappings);

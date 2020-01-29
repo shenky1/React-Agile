@@ -1,9 +1,11 @@
 import React from "react";
 import axios from 'axios';
-import { Container, Row, Input, Button, Card, CardBody } from "reactstrap";
+import { Container, Row, Input, Button, Card, CardBody, Form, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import List from "../list/List";
 import { FaTimes, FaPlus } from "react-icons/fa";
 import './Board.css'
+import { FiEdit3 } from "react-icons/fi";
+import { Redirect } from "react-router-dom";
 
 class Board extends React.Component {
 
@@ -16,7 +18,12 @@ class Board extends React.Component {
         this.state = {
             myLists: [],
             newListTitle: '',
-            addAnotherList: false
+            addAnotherList: false,
+            edit: false,
+            editName: this.board.name,
+            editDescription: this.board.description,
+            team: null,
+            deleteModal: false
         };
 
         this.getAllListsForBoard = this.getAllListsForBoard.bind(this);
@@ -28,6 +35,12 @@ class Board extends React.Component {
 
     componentDidMount() {
         this.getAllListsForBoard();
+        axios.get('https://localhost:44322/api/teams/' + this.board.teamId)
+        .then(response => {
+            this.setState({
+                team: response.data.value,
+            });
+        });
     }
 
     getAllListsForBoard() {
@@ -41,15 +54,15 @@ class Board extends React.Component {
     }
 
     render() {
-        var backgroundStyle = {
-            backgroundImage: "url(" + this.board.imageUrl + ")",
-            backgroundSize: "cover"
-        };
-
         return (
-                <Container fluid className="p-0" style={ backgroundStyle }>
+                <Container fluid className="p-0">
                     <div className="px-4 pt-4 pb-2 h-100 d-flex flex-column">
-                        <Row><h3 className="ml-3">Welcome to {this.board.name }</h3></Row>
+                    {!this.state.boardDeleted || 
+                        <Redirect to={{
+                            pathname: '/',
+                        }}/>}
+                        {this.showDeleteModal()}
+                        {this.displayHeader()}
                         <Row className="mt-2 flex-grow-1 position-relative">
                             <div className="list-container">
                                 {this.state.myLists.sort((a, b) => a.orderId > b.orderId ? 1 : -1).map((list, index, array) => (
@@ -66,6 +79,128 @@ class Board extends React.Component {
                     </div>
                 </Container>
         );
+    }
+
+    showDeleteModal() {
+        return !this.state.deleteModal || (
+            <Modal isOpen={this.state.deleteModal}>
+                <ModalHeader>Delete board</ModalHeader>
+                <ModalBody>
+                    Are you sure that you want to delete this board?
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={() => this.deleteBoard()}>Delete board</Button>{' '}
+                    <Button color="secondary" onClick={() => this.toggleModal()}>Cancel</Button>
+                </ModalFooter>
+        </Modal>
+        );
+    }
+
+    deleteBoard() {
+        axios.post('https://localhost:44322/api/boards/deleteEntireBoard/' + this.board.id)
+        .then(response => {
+            this.setState({
+                deleteModal: false,
+                boardDeleted: true
+            })
+        });
+    }
+
+    displayHeader() {
+        var backgroundStyle = {
+            backgroundImage: "url(" + this.board.imageUrl + ")",
+            backgroundSize: "cover"
+        };
+        return (
+            <div className="d-flex">
+                <div className="team-image-container team-image mr-3" style={backgroundStyle}>
+                </div>
+                {this.state.edit ? this.displayEdit() : this.displayInfo()}
+            </div>
+        );
+    }
+
+    displayInfo() {
+        return (
+            <div className="d-inline d-flex flex-column">     
+                <h2>{this.board ? this.board.name : ''}</h2>
+                <div>{this.board ? this.board.description : ''}</div>
+                {(this.state.team && this.state.team.authorId !== this.user.id) || 
+                    <Button color="link text-left" onClick={() => this.setState({edit: true})}>
+                        <FiEdit3 />
+                        <span className="ml-2">Edit board</span>
+                    </Button>
+                }
+            </div>
+        );
+    }
+
+    displayEdit() {
+        return (
+            <Form className="d-flex">
+                <div className="flex-column">
+                    <FormGroup>
+                        <Label>Board name</Label>
+                        <Input
+                            placeholder="Enter board name"
+                            value={this.state.editName}
+                            onChange={(e) => this.setState({editName: e.target.value})}
+                        ></Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Board Description</Label>
+                        <Input
+                            placeholder="Enter board description"
+                            value={this.state.editDescription}
+                            onChange={(e) => this.setState({editDescription: e.target.value})}
+                        ></Input>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Team</Label>
+                        <Input
+                            disabled
+                            value={this.state.team.name}
+                        ></Input>
+                    </FormGroup>
+                    <Button color="primary" className="mr-1" onClick={() => this.editBoard()}>Edit board</Button>
+                    <Button color="secondary" onClick={() => this.cancelEdit()}>Cancel</Button>
+                    <FormGroup>
+                        <Button color="link" onClick={() => this.setState({deleteModal: true})}>Delete this board?</Button>
+                    </FormGroup>
+                </div>
+            </Form>
+
+        );
+    }
+
+    editBoard() {
+        if (!this.state.editName.length) return;
+
+        axios.put('https://localhost:44322/api/boards/' + this.board.id, {
+            id: this.board.id,
+            name: this.state.editName,
+            description: this.state.editDescription,
+            imageUrl: this.board.imageUrl,
+            teamId: this.state.team.id
+        }).then(response => {
+            this.board.name = this.state.editName;
+            this.board.description = this.state.editDescription;
+            this.componentDidMount();
+            this.cancelEdit();
+        });
+    }
+
+    cancelEdit() {
+        this.setState({
+            edit: false
+        });
+    }
+
+    toggleModal() {
+        this.setState(prevState => ({
+            ...prevState,
+            deleteModal: !prevState.deleteModal
+        }))
     }
 
     createList(list, index, array) {

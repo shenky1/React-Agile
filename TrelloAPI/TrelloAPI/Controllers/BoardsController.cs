@@ -97,5 +97,27 @@ namespace TrelloAPI.Controllers
 
             return Ok(boards);
         }
+
+        [HttpGet("getBoardsForTeam/{id}")]
+        public async Task<ActionResult<BoardResponse>> GetBoardsForTeam(long id)
+        {
+            var boards = await _boardService.GetBoardsForTeam(id);
+            if (boards == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(boards);
+        }
+
+        [HttpPost("deleteEntireBoard/{id}")]
+        public async Task<ActionResult<Board>> DeleteEntireBoard(long id)
+        {
+            var board = await _boardService.DeleteEntireBoard(id);
+
+
+            return CreatedAtAction(nameof(GetBoard), board);
+        }
+
     }
 }

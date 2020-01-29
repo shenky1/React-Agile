@@ -67,7 +67,7 @@ namespace TrelloAPI.Controllers
                 user.Username,
                 user.FirstName,
                 user.LastName,
-                Token = tokenString
+                user.EMail
             });
         }
 

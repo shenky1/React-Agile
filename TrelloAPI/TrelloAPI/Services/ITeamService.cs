@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TrelloAPI.Controllers.Request;
-using TrelloAPI.Controllers.Response;
+using TrelloAPI.Controllers.Users;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TrelloAPI.Models;
 
 namespace TrelloAPI.Services
 {
@@ -18,6 +19,9 @@ namespace TrelloAPI.Services
 
         Task<ActionResult<TeamResponse>> DeleteTeam(long id);
 
+        Task<Team> UpdateTeamUsers(long id, List<UserModel> users);
+
+        Task<Team> DeleteEntireTeam(long id);
 
     }
 }

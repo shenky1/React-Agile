@@ -3,6 +3,7 @@ using TrelloAPI.Controllers.Request;
 using TrelloAPI.Controllers.Response;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TrelloAPI.Models;
 
 namespace TrelloAPI.Services
 {
@@ -20,7 +21,9 @@ namespace TrelloAPI.Services
 
         Task<IEnumerable<BoardResponse>> GetBoardsOfUser(long id);
 
+        Task<IEnumerable<BoardResponse>> GetBoardsForTeam(long id);
 
+        Task<ActionResult<Board>> DeleteEntireBoard(long id);
 
     }
 }

@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Login from "./components/login/Login";
 import Register from './components/register/Register';
-import Home from "./components/Home";
 import Profile from "./components/Profile";
 import About from "./components/About";
 import Error from "./components/Error";
@@ -14,7 +13,7 @@ import Teams from "./components/Teams";
 import Topbar from "./shared/Topbar";
 import Sidebar from "./shared/Sidebar";
 
-import './App.css';
+import './App.scss';
 
 
 const PrivateRoute = ({ component: Component, isLoggedIn, ...rest }) => (
@@ -81,17 +80,16 @@ class App extends React.Component {
 
 const HomeApp = (props) => {
   return (
-    <div className="d-flex" id="wrapper">
-        <Sidebar />
-        <div id="page-content-wrapper" className="d-flex flex-column">
+    <div className="d-flex flex-column content-wrapper">
+        <Topbar user={props.user} logout={props.logout}/>
 
-            <Topbar user={props.user} logout={props.logout}/>
-            
+        <div id="page-content-wrapper" className="d-flex flex-grow-1 position-relative">
+            <Sidebar user={props.user}/>
             <div className="route-container flex-grow-1 d-flex">
                 <Switch>
                     <Route path="/" component={Boards} exact/>
                     <Route path="/board" component={Board}/>
-                    <Route path="/teams" component={Teams}/>
+                    <Route path="/teams/:id" component={(props) => <Teams {...props} /> }/>
                     <Route path="/profile" component={Profile} />
                     <Route path="/about" component={About} />
                     <Route component={Error} />

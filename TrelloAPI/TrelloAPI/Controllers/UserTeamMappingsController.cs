@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrelloAPI.Controllers.Request;
 using TrelloAPI.Controllers.Response;
+using TrelloAPI.Controllers.Users;
 using Microsoft.EntityFrameworkCore;
 using TrelloAPI.Models;
 using TrelloAPI.Services;
@@ -84,6 +85,27 @@ namespace TrelloAPI.Controllers
             }
 
             return Ok(teamUserMapping);
+        }
+
+        [HttpGet("getTeamsForUser/{id}")]
+        public async Task<ActionResult<IEnumerable<TeamResponse>>> GetTeamsForUser(long id)
+        {
+            var teams = await _teamUserMappingService.GetTeamsForUser(id);
+            return Ok(teams);
+        }
+
+        [HttpGet("getUsersForTeam/{id}")]
+        public async Task<ActionResult<IEnumerable<UserModel>>> GetUsersForTeam(long id)
+        {
+            var users = await _teamUserMappingService.GetUsersForTeam(id);
+            return Ok(users);
+        }
+
+        [HttpGet("removeUserFromTeam/{userId}/{teamId}")]
+        public async Task<ActionResult<IEnumerable<TeamUserMapping>>> RemoveUserFromTeam(long userId, long teamId)
+        {
+            var users = await _teamUserMappingService.RemoveUserFromTeam(userId, teamId);
+            return Ok(users);
         }
     }
 }

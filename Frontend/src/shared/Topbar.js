@@ -2,6 +2,8 @@ import React from "react";
 import defaultImage from "../assets/images/default-user.jpg";
 import { Link } from 'react-router-dom'
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import logo from "../assets/images/boards-logo.jpg";
+import '../App.scss';
 
 class Topbar extends React.Component { 
   constructor(props) {
@@ -24,8 +26,16 @@ class Topbar extends React.Component {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           
-          <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-            
+          <ul className="navbar-nav justify-content-between w-100 mt-2 mt-lg-0">
+            <li className="nav-item d-flex align-items-center">
+                <div className="d-inline">
+                    <img src={logo} width="40" height="40" alt=""></img>
+                </div>
+                <div className="topbar-title d-inline">
+                    <span className="topbar-title-text">Trello</span>
+                </div>
+            </li>
+
             <li className="nav-item dropdown">
               
               <div className="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

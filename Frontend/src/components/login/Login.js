@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Form, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import axios from 'axios';
 import "./Login.css";
 import { Link } from 'react-router-dom';
+import { Form, FormGroup, Button, Input, Label } from "reactstrap";
 
 
 class Login extends React.Component {
@@ -32,8 +32,8 @@ class Login extends React.Component {
             <div className="Login">
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup controlId="username" bsSize="large">
-                        <FormLabel>Username</FormLabel>
-                        <FormControl
+                        <Label>Username</Label>
+                        <Input
                             autoFocus
                             type="text"
                             value={this.state.username}
@@ -42,8 +42,8 @@ class Login extends React.Component {
                       </FormGroup>
 
                       <FormGroup controlId="password" bsSize="large">
-                          <FormLabel>Password</FormLabel>
-                          <FormControl
+                          <Label>Password</Label>
+                          <Input
                               value={this.state.password}
                               onChange={e => this.setState({ 'password': e.target.value})}
                               type="password"

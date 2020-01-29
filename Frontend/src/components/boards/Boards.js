@@ -40,7 +40,7 @@ render() {
                 <Row><h3 className="ml-3">Personal Boards</h3></Row>
                 <Row xs="4" className="mt-2">
                     {this.state.myBoards.map(board => (
-                        <Col key={board.id}>
+                        <Col className="mt-3" key={board.id}>
                             <Card>
                                 <CardImg top src={board.imageUrl} alt="Card image cap" width="100%" height="200px"/>
                                 <CardBody>

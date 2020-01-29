@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TrelloAPI.Controllers.Request;
-using TrelloAPI.Controllers.Response;
+using TrelloAPI.Controllers.Users;
 using TrelloAPI.Data.EFCore;
 using TrelloAPI.Models;
 using System.Collections.Generic;
@@ -61,10 +61,20 @@ namespace TrelloAPI.Services
             return teamResponse;
         }
 
-        public void GetTeamsForUser(long id)
+        public async Task<Team> UpdateTeamUsers(long id, List<UserModel> users)
         {
-            return;
+            var team = await _teamRepository.UpdateTeamUsers(id, users);
+            
+            return team;
         }
+
+        public async Task<Team> DeleteEntireTeam(long id)
+        {
+            var team = await _teamRepository.DeleteEntireTeam(id);
+
+            return team;
+        }
+
 
 
         public Team MapRequestToModel(TeamRequest teamRequest)
@@ -77,7 +87,9 @@ namespace TrelloAPI.Services
             var team = new Team
             {
                 Id = teamRequest.Id,
-                Name = teamRequest.Name
+                Name = teamRequest.Name,
+                AuthorId = teamRequest.AuthorId,
+                Description = teamRequest.Description
             };
 
             return team;
@@ -110,7 +122,9 @@ namespace TrelloAPI.Services
             var teamResponse = new TeamResponse
             {
                 Id = team.Id,
-                Name = team.Name
+                Name = team.Name,
+                AuthorId = team.AuthorId,
+                Description = team.Description
             };
 
             return teamResponse;

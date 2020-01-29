@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TrelloAPI.Controllers.Request;
 using TrelloAPI.Controllers.Response;
+using TrelloAPI.Controllers.Users;
 using TrelloAPI.Data.EFCore;
 using TrelloAPI.Models;
 using System.Collections.Generic;
@@ -61,9 +62,22 @@ namespace TrelloAPI.Services
             return teamUserMappingResponse;
         }
 
-        public void GetTeamUserMappingsForUser(long id)
+        public async Task<List<Team>> GetTeamsForUser(long id)
         {
-            return;
+            var teams = await _teamUserMappingRepository.GetTeamsForUser(id);
+            return teams;
+        }
+
+        public async Task<List<UserModel>> GetUsersForTeam(long id)
+        {
+            var users = await _teamUserMappingRepository.GetUsersForTeam(id);
+            return users;
+        }
+
+        public async Task<TeamUserMapping> RemoveUserFromTeam(long userId, long teamId)
+        {
+            var tum = await _teamUserMappingRepository.RemoveUserFromTeam(userId, teamId);
+            return tum;
         }
 
 

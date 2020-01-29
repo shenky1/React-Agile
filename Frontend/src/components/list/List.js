@@ -6,11 +6,10 @@ import { Card as ReactCard,
          Button, Modal, ModalHeader,
          ModalBody, ModalFooter, Label,
          Input, ButtonDropdown, DropdownToggle,
-         DropdownMenu, DropdownItem } from "reactstrap";
-import { Toast } from 'react-bootstrap';
+         DropdownMenu, DropdownItem, Toast, ToastHeader } from "reactstrap";
 import { FaPlus, FaTimes, FaCheck } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import '../../App.css';
+import '../../App.scss';
 import './List.css'
 
 class List extends React.Component {
@@ -122,10 +121,10 @@ class List extends React.Component {
         }
         return !this.state.showToast || ( 
             <Toast style={ toastStyle } onClose={() => this.setState({showToast: false})} show={this.state.showToast} delay={3000} autohide>
-                <Toast.Header>
+                <ToastHeader>
                     <this.state.icon />
                     <strong className="ml-2 mr-auto">{this.state.status}</strong>
-                </Toast.Header>
+                </ToastHeader>
                 <Toast.Body>{this.state.message}</Toast.Body>
             </Toast>
         );

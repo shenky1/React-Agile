@@ -25,5 +25,32 @@ namespace TrelloAPI.Data.EFCore
             });
             return userBoards;
         }
+
+        public async Task<List<Board>> GetBoardsForTeam(long id)
+        {
+            var boards = await _context.Boards.Where(board => board.TeamId == id).ToListAsync();
+            
+            return boards;
+        }
+
+        public async Task<Board> DeleteEntireBoard(long id)
+        {
+            Board board = _context.Boards.FirstOrDefault(board => board.Id == id);
+            List<List> lists = _context.Lists.Where(list => list.BoardId == board.Id).ToList();
+            lists.ForEach(list =>
+            {
+                List<Card> cards = _context.Cards.Where(card => card.ListId == list.Id).ToList();
+                cards.ForEach(card =>
+                {
+                    List<Comment> comments = _context.Comments.Where(comment => comment.CardId == card.Id).ToList();
+                    _context.RemoveRange(comments);
+                });
+                _context.RemoveRange(cards);
+            });
+            _context.RemoveRange(lists);
+            _context.Remove(board);
+            await _context.SaveChangesAsync();
+            return board;
+        }
     }
 }

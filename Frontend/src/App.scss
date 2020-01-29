@@ -1,5 +1,20 @@
+
 .name {
   font-size: 12px;
+}
+
+.content-wrapper {
+  height: 100vh;
+}
+
+.route-container {
+  margin-left: 230px;
+}
+
+.sidebar-container {
+  width: 230px;
+  position: absolute;
+  height: 100%;
 }
 
 .topbar-title-text {
@@ -54,4 +69,21 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
+}
+
+.team-image-container {
+  background-color: #dfdfdf;
+  border-radius: 4px;
+}
+
+.team-image {
+  width: 100px;
+  height: 100px;
+}
+
+.member-owner {
+    position: absolute;
+    right: 0px;
+    color: blue;
+    font-size: 20px;
 }
