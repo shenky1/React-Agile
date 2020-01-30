@@ -6,8 +6,8 @@ import { Card as ReactCard,
          Button, Modal, ModalHeader,
          ModalBody, ModalFooter, Label,
          Input, ButtonDropdown, DropdownToggle,
-         DropdownMenu, DropdownItem, Toast, ToastHeader } from "reactstrap";
-import { FaPlus, FaTimes, FaCheck } from 'react-icons/fa';
+         DropdownMenu, DropdownItem } from "reactstrap";
+import { FaPlus, FaTimes } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import '../../App.scss';
 import './List.css'
@@ -19,7 +19,6 @@ class List extends React.Component {
             myCards: [],
             showModal: false,
             title: '',
-            showToast: false,
             dropdownOpen: false
 
         };
@@ -27,10 +26,8 @@ class List extends React.Component {
         this.list = this.props.list;
 
         this.toggleModal = this.toggleModal.bind(this);
-        this.showToast = this.showToast.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.displayToast = this.displayToast.bind(this);
     }
 
 
@@ -47,7 +44,6 @@ class List extends React.Component {
 
     removeList() {
         axios.delete('https://localhost:44322/api/lists/' + this.list.id).then(res => {
-            this.showToast(FaCheck, 'Success', 'List deleted successfully');
             this.props.rerenderBoard();
         });
     }
@@ -55,7 +51,6 @@ class List extends React.Component {
     render() {
         return (
             <ReactCard className="react-card">
-                {this.displayToast()}
                 <CardBody className="p-2 d-flex flex-column">
                     <CardTitle className="ml-2 mt-2 d-flex">
                         <div className="pr-2 flex-grow-1">
@@ -85,9 +80,9 @@ class List extends React.Component {
                             </DropdownMenu>
                         </ButtonDropdown>
                     </CardTitle>
-                    <CardText className="flex-grow-1 overflow-auto">                        
+                    <CardText className="flex-grow-1">                        
                         {this.state.myCards.map(card => (
-                            <Card showToast={this.showToast} rerender={this.componentDidMount}key={card.id} card={card}></Card>
+                            <Card board={this.props.board} list={this.list} card={card} rerender={this.componentDidMount}key={card.id}></Card>
                         ))}
                     </CardText>
                     {this.showAccordingFooter()}
@@ -111,24 +106,6 @@ class List extends React.Component {
         });
     }
 
-    displayToast() {
-        var toastStyle = {
-            position: 'fixed',
-            top: '20px',
-            right: '20px',
-            zIndex: '1000',
-            width: '250px'
-        }
-        return !this.state.showToast || ( 
-            <Toast style={ toastStyle } onClose={() => this.setState({showToast: false})} show={this.state.showToast} delay={3000} autohide>
-                <ToastHeader>
-                    <this.state.icon />
-                    <strong className="ml-2 mr-auto">{this.state.status}</strong>
-                </ToastHeader>
-                <Toast.Body>{this.state.message}</Toast.Body>
-            </Toast>
-        );
-    }
 
     showAccordingFooter() {
         return this.state.showNewCard ? (
@@ -153,14 +130,7 @@ class List extends React.Component {
         )
     }
 
-    showToast(Icon, status, message) {
-        this.setState({
-            icon: Icon,
-            status: status,
-            message: message,
-            showToast: true
-        })
-    }
+
 
     addNewCard() {
         if (this.state.title) {
@@ -169,7 +139,6 @@ class List extends React.Component {
                 ListId: this.props.list.id
             })
             .then(response => {
-                this.showToast(FaCheck, 'Success', 'Card added successufully!');
                 this.componentDidMount();
             });
         }

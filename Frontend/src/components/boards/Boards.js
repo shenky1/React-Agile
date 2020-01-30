@@ -42,10 +42,10 @@ render() {
                     {this.state.myBoards.map(board => (
                         <Col className="mt-3" key={board.id}>
                             <Card>
-                                <CardImg top src={board.imageUrl} alt="Card image cap" width="100%" height="200px"/>
+                                <CardImg top src={board.imageUrl} alt="Card image cap" width="100%" height="100px"/>
                                 <CardBody>
-                                    <CardTitle>{board.name}</CardTitle>
-                                    <CardText style={{height: "40px"}}>{board.description}</CardText>
+                                    <CardTitle><b>{board.name}</b></CardTitle>
+                                    <CardText>{board.description}</CardText>
                                     <Button onClick={() => this.setState(prevState => ({...prevState, board: board}))}>Enter</Button>
                                 </CardBody>
                             </Card>

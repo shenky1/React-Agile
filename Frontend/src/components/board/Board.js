@@ -23,7 +23,7 @@ class Board extends React.Component {
             editName: this.board.name,
             editDescription: this.board.description,
             team: null,
-            deleteModal: false
+            deleteModal: false,
         };
 
         this.getAllListsForBoard = this.getAllListsForBoard.bind(this);
@@ -63,7 +63,7 @@ class Board extends React.Component {
                         }}/>}
                         {this.showDeleteModal()}
                         {this.displayHeader()}
-                        <Row className="mt-2 flex-grow-1 position-relative">
+                        <Row className="flex-grow-1">
                             <div className="list-container">
                                 {this.state.myLists.sort((a, b) => a.orderId > b.orderId ? 1 : -1).map((list, index, array) => (
                                     <div className="list" key={list.id}>
@@ -205,13 +205,13 @@ class Board extends React.Component {
 
     createList(list, index, array) {
         if (index === 0 && index === array.length - 1) {
-            return (<List rerenderBoard={this.getAllListsForBoard} isFirst isLast list={list}></List>);
+            return (<List board={this.board} rerenderBoard={this.getAllListsForBoard} isFirst isLast list={list}></List>);
         } else if (index === array.length - 1) {
-            return (<List rerenderBoard={this.getAllListsForBoard} isLast list={list}></List>);
+            return (<List board={this.board} rerenderBoard={this.getAllListsForBoard} isLast list={list}></List>);
         } else if (index === 0) {
-            return (<List rerenderBoard={this.getAllListsForBoard} isFirst list={list}></List>);
+            return (<List board={this.board} rerenderBoard={this.getAllListsForBoard} isFirst list={list}></List>);
         } else {
-            return (<List rerenderBoard={this.getAllListsForBoard} list={list}></List>);
+            return (<List board={this.board} rerenderBoard={this.getAllListsForBoard} list={list}></List>);
         }
     }
 
@@ -254,7 +254,7 @@ class Board extends React.Component {
                     </CardBody>
                 </Card>
             ) : (
-                <Button onClick={() => this.setState({addAnotherList: true})} className="hsla-button text-left">
+                <Button onClick={() => this.setState({addAnotherList: true})} style={{"backgroundColor": "#ebecf0", 'color': 'black'}} className="text-left">
                     <FaPlus />
                     <span className="ml-2">Add another list</span>
                 </Button>
