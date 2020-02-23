@@ -1,0 +1,13 @@
+.list-container {
+    white-space: nowrap;
+    padding-bottom: 15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.list {
+    width: 300px;
+    margin: 7px;
+    display: inline-block;
+    height: 100%;
+}
